@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Switch, useParams } from "react-router-dom";
 import Header from "./Header";
 import NotFound from "./NotFound";
 import HomeScreen from "../Home/HomeScreen";
 import StudyScreen from "../Study/StudyScreen";
+import DeckScreen from "../Deck/DeckScreen";
+import EditDeck from "../Deck/EditDeck";
+import AddCard from "../Deck/AddCard";
 
 function Layout() {
   return (
@@ -15,8 +18,17 @@ function Layout() {
           <Route exact path="/">
             <HomeScreen />
           </Route>
+          <Route exact path="/decks/:deckId">
+            <DeckScreen />
+          </Route>
+          <Route path="/decks/:deckId/edit">
+            <EditDeck />
+          </Route>
           <Route path="/decks/:deckId/study">
             <StudyScreen />
+          </Route>
+          <Route path={`/decks/:deckId/cards/new`}>
+            <AddCard />
           </Route>
           <Route>
             <NotFound />
