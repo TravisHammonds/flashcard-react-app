@@ -66,7 +66,7 @@ function HomeScreen() {
   useEffect(() => {
     setDecks(testDecks);
     setCards(testCards);
-  });
+  },[]);
   return (
     <Switch>
       <Route path="/">
