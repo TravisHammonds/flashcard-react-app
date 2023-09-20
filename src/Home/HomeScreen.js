@@ -51,13 +51,6 @@ function HomeScreen() {
       deckId: 2,
       id: 5,
     },
-    {
-      cards: [],
-      front: "b",
-      back: "b",
-      deckId: 1,
-      id: 7,
-    },
   ];
 
   const [decks, setDecks] = useState([]);
