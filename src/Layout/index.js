@@ -1,41 +1,60 @@
-import React, { useState } from "react";
-import { Route, Switch, useParams } from "react-router-dom";
-import Header from "./Header";
-import NotFound from "./NotFound";
-import HomeScreen from "../Home/HomeScreen";
-import StudyScreen from "../Study/StudyScreen";
-import DeckScreen from "../Deck/DeckScreen";
-import EditDeck from "../Deck/EditDeck";
-import AddCard from "../Deck/AddCard";
+import React from 'react';
+import { Route, Link, Switch } from 'react-router-dom';
+import Header from './Header';
+import NotFound from './NotFound';
+import HomeScreen from './HomeScreen';
+import StudyScreen from './StudyScreen';
+import CreateDeck from './CreateDeck';
+import ViewDeck from './ViewDeck';
+import EditDeck from './EditDeck';
+import AddCard from './AddCard';
+import EditCard from './EditCard';
 
 function Layout() {
   return (
-    <>
+    <React.Fragment>
       <Header />
-      <div className="container">
+      <div className='container'>
         <Switch>
-          {/* TODO: Implement the screen starting here */}
-          <Route exact path="/">
+          <Route exact path='/'>
+            <Link to='/decks/new'>
+              <button className='btn btn-secondary'>
+                <i className='fas fa-plus'></i> Create Deck
+              </button>
+            </Link>
             <HomeScreen />
           </Route>
-          <Route exact path="/decks/:deckId">
-            <DeckScreen />
+
+          <Route exact path='/decks/new'>
+            <CreateDeck />
           </Route>
-          <Route path="/decks/:deckId/edit">
-            <EditDeck />
-          </Route>
-          <Route path="/decks/:deckId/study">
+
+          <Route exact path='/decks/:deckId/study'>
             <StudyScreen />
           </Route>
-          <Route path={`/decks/:deckId/cards/new`}>
+
+          <Route exact path='/decks/:deckId/edit'>
+            <EditDeck />
+          </Route>
+
+          <Route exact path='/decks/:deckId'>
+            <ViewDeck />
+          </Route>
+
+          <Route exact path='/decks/:deckId/cards/new'>
             <AddCard />
           </Route>
+
+          <Route exact path='/decks/:deckId/cards/:cardId/edit'>
+            <EditCard />
+          </Route>
+
           <Route>
             <NotFound />
           </Route>
         </Switch>
       </div>
-    </>
+    </React.Fragment>
   );
 }
 
