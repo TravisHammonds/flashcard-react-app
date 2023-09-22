@@ -1,6 +1,6 @@
-import React from 'react';
-import { useHistory, useRouteMatch, Link } from 'react-router-dom';
-import { deleteCard } from '../utils/api';
+import React from "react";
+import { useHistory, useRouteMatch, Link } from "react-router-dom";
+import { deleteCard } from "../utils/api";
 
 function ViewCards({ cards = [] }) {
   const history = useHistory();
@@ -8,7 +8,7 @@ function ViewCards({ cards = [] }) {
 
   const deleteCardHandler = async (cardId) => {
     const response = window.confirm(
-      'Delete this card? You will not be able to recover it.'
+      "Delete this card? You will not be able to recover it."
     );
     if (response) {
       await deleteCard(cardId);
@@ -17,35 +17,33 @@ function ViewCards({ cards = [] }) {
   };
 
   const styledCards = cards.map((card, index) => (
-    <div key={index} className='card'>
-      <div className='card-body'>
-        <div className='row d-flex justify-content-between'>
-          <div className='col-5'>{card.front}</div>
-          <div className='col-5'>
-            {card.back}
-            <div>
-              <Link to={`${url}/cards/${card.id}/edit`}>
-                <button className='btn btn-secondary m-3'>
-                  <i className='fas fa-edit'></i> Edit
-                </button>
-              </Link>
-              <button
-                className='btn btn-danger m-3'
-                onClick={() => deleteCardHandler(card.id)}
-              >
-                <i className='fas fa-trash'></i> Delete Card
-              </button>
-            </div>
-          </div>
+    <div key={index} className="card mb-2">
+      <div className="card-body">
+        <div className="row">
+          <div className="col">{card.front}</div>
+          <div className="col">{card.back}</div>
+        </div>
+        <div className="d-flex justify-content-end">
+          <Link to={`${url}/cards/${card.id}/edit`}>
+            <button className="btn btn-secondary m-1">
+              <i className="fas fa-edit"></i> Edit
+            </button>
+          </Link>
+          <button
+            className="btn btn-danger m-1"
+            onClick={() => deleteCardHandler(card.id)}
+          >
+            Delete Card
+          </button>
         </div>
       </div>
     </div>
   ));
   return (
     <React.Fragment>
-      <div className='card'>
-        <div className='card-header text-center'>
-          <h2 className='text-center'>Cards</h2>
+      <div className="card border-0">
+        <div>
+          <h2>Cards</h2>
         </div>
       </div>
       {styledCards}

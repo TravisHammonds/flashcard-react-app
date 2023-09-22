@@ -55,7 +55,7 @@ function HomeScreen() {
           <p>{deck.cards.length} cards</p>
         </div>
         <p className='card-text text-secondary'>{deck.description}</p>
-        <div className='d-flex justify-content-between mt-4'>
+        <div className='d-flex mt-4'>
           <Link to={`/decks/${deck.id}`} className='card-link'>
             <button
               className='btn btn-secondary'
@@ -72,7 +72,7 @@ function HomeScreen() {
               <i className='fas fa-book'></i> Study
             </button>
           </Link>
-          <Link to='#' className='card-link'>
+          <Link to='#' className='ml-auto card-link'>
             <button
               className='btn btn-danger'
               onClick={() => deleteHandler(deck.id)}

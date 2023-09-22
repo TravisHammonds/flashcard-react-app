@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { readDeck } from '../utils/api';
+import React, { useEffect, useState, useRef } from "react";
+import { Link, useParams } from "react-router-dom";
+import { readDeck } from "../utils/api";
 
 function StudyScreen() {
   const mountedRef = useRef(false);
   const initialState = {
-    deck: { name: 'loading...', cards: [] },
+    deck: { name: "loading...", cards: [] },
     isCardFlipped: false,
     currentIndex: 0,
   };
@@ -34,7 +34,7 @@ function StudyScreen() {
           }));
         }
       } catch (error) {
-        if (error.name !== 'AbortError') {
+        if (error.name !== "AbortError") {
           throw error;
         }
       }
@@ -48,7 +48,7 @@ function StudyScreen() {
   function flipCardHandler() {
     setStudyScreenState({
       ...StudyScreenState,
-      isCardFlipped: !StudyScreenState['isCardFlipped'],
+      isCardFlipped: !StudyScreenState["isCardFlipped"],
     });
   }
 
@@ -56,7 +56,7 @@ function StudyScreen() {
     const { cards } = deck;
     if (currentIndex === cards.length - 1) {
       const response = window.confirm(
-        'Do you want to restart the deck and study again?'
+        "Do you want to restart the deck and study again?"
       );
       if (response) {
         setStudyScreenState((currentState) => ({
@@ -74,17 +74,17 @@ function StudyScreen() {
   }
 
   const breadcrumb = (
-    <nav aria-label='breadcrumb'>
-      <ol className='breadcrumb'>
-        <li className='breadcrumb-item'>
-          <Link to='/'>
-            <i className='fas fa-home'></i> Home
+    <nav aria-label="breadcrumb">
+      <ol className="breadcrumb">
+        <li className="breadcrumb-item">
+          <Link to="/">
+            <i className="fas fa-home"></i> Home
           </Link>
         </li>
-        <li className='breadcrumb-item'>
+        <li className="breadcrumb-item">
           <Link to={`/decks/${deckId}`}>{deck.name}</Link>
         </li>
-        <li className='breadcrumb-item active' aria-current='page'>
+        <li className="breadcrumb-item active" aria-current="page">
           Study
         </li>
       </ol>
@@ -95,17 +95,17 @@ function StudyScreen() {
     return (
       <React.Fragment>
         {breadcrumb}
-        <div className='card'>
-          <div className='card-body'>
+        <div className="card">
+          <div className="card-body">
             <h1>{deck.name}: Study</h1>
-            <h2 className='card-title'>Not enough cards.</h2>
-            <p className='card-text'>
+            <h2 className="card-title">Not enough cards.</h2>
+            <p className="card-text">
               You need at least 3 cards to study. Please add more cards to this
               deck.
             </p>
             <Link to={`/decks/${deckId}/cards/new`}>
-              <button type='button' className='btn btn-primary'>
-                <i className='fas fa-plus'></i> Add Card
+              <button type="button" className="btn btn-primary">
+                <i className="fas fa-plus"></i> Add Card
               </button>
             </Link>
           </div>
@@ -116,33 +116,34 @@ function StudyScreen() {
     return (
       <React.Fragment>
         {breadcrumb}
-        <h1 className='text-center'>Currently Studying: {deck.name} </h1>
-        <div className='card'>
-          <div className='card-body'>
-            <h4 className='card-title'>
+        <h1 className="text-center">Currently Studying: {deck.name} </h1>
+        <div className="card">
+          <div className="card-body">
+            <h4 className="card-title">
               Card {currentIndex + 1} of {deck.cards.length}
             </h4>
-            <h5 className='card-text'>
+            <h5 className="card-text">
               {!isCardFlipped
                 ? `Question: ${deck.cards[currentIndex].front}`
                 : `Answer: ${deck.cards[currentIndex].back}`}
             </h5>
-          </div>
-          <button
-            type='button'
-            className='btn btn-secondary py-3'
-            onClick={() => flipCardHandler()}
-          >
-            Flip
-          </button>
-          {isCardFlipped && (
+
             <button
-              className='btn btn-primary py-3'
-              onClick={getNextCardHandler}
+              type="button"
+              className="btn btn-secondary m-1"
+              onClick={() => flipCardHandler()}
             >
-              Next
+              Flip
             </button>
-          )}
+            {isCardFlipped && (
+              <button
+                className="btn btn-primary m-1 "
+                onClick={getNextCardHandler}
+              >
+                Next
+              </button>
+            )}
+          </div>
         </div>
       </React.Fragment>
     );
